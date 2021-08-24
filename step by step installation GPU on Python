@@ -1,0 +1,26 @@
+install python
+install Anaconda
+
+< Restart your system >
+
+Ctl+R -->> cmd -->> righte clik Run as Administrator -->> Enter
+
+conda uninstall tensorflow
+conda uninstall tensorflow-gpu
+conda uninstall keras
+
+< Restart your system >
+
+conda create -n tensorflow -->> y -->> Enter
+conda activate tensorflow -->> y -->> Enter
+
+< Restart your system >
+
+conda install cudnn=8.2.1 -->> y -->> Enter -->>  NOTE: <your system support version -->> finde hear -->> https://developer.nvidia.com/rdp/cudnn-archive >
+
+< Restart your system >
+
+conda create -n tensorflow-gpu -->> y -->> Enter
+
+< Restart your system >
+
