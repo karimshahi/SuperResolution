@@ -24,3 +24,4 @@ conda create -n tensorflow-gpu -->> y -->> Enter
 
 < Restart your system >
 
+
