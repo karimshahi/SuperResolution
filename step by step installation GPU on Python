@@ -25,3 +25,16 @@ conda create -n tensorflow-gpu -->> y -->> Enter
 < Restart your system >
 
 
+-----------------------------------------------
+install GPU Driver
+install cuda 
+install cudnn
+install visual studio 2022
+install anaconda
+install python==3.7
+conda create tfgpu
+conda activate tfgpu
+pip install tensorflow
+pip install tensorflow-gpu
+
+enjoy cuda and GPU computing
