@@ -6,5 +6,5 @@ karimshahi.com
 @karimshahiniyar instagram, telegram, facebook
 @karimshahi youtube, twitter, linkedin
 
-09358383787
-
+0935-8383-787
+0921-0912-100
