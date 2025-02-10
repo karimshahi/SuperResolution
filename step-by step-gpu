@@ -1,0 +1,6 @@
+pip install tensorflow
+pip install pytorch
+---------------------------
+conda create --name tfgpu
+conda activate tfgpu
+---------------------
