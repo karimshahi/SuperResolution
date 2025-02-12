@@ -24,6 +24,7 @@ libcudnn* library files to the lib64 folder (e.g., /usr/local/cuda/lib64/ on Lin
 Make sure to update your environment variables if necessary (e.g., LD_LIBRARY_PATH on Linux).
 Verify Installation :
 Run a sample program or test script to ensure that cuDNN is correctly installed and working with CUDA 11.8.
+if you is iran( befor installation you shud run vpn)
 
 ---------------------
 install vs2022 
