@@ -1,8 +1,15 @@
-
----------------------------
+download and install, python 3.10,
+anaconda latest version
+https://docs.anaconda.com/anaconda/install/
+( https://www.anaconda.com/download?utm_source=anacondadocs&utm_medium=documentation&utm_campaign=download&utm_content=topnavalldocs) 
+---------------------
+install vs2022 
+install pycharm 2024
+---------------------
 conda create --name tfgpu
 conda activate tfgpu
 ---------------------
 pip install tensorflow
 pip install pytorch ( https://pytorch.org/) ( If you have installed any operating system and any type of CUDA on your system, select it from the desired list, and the corresponding link below will change accordingly.) 
 for example this link is for ( stable, windows, pip, python, cuda 11.8 ) pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+---------------------
