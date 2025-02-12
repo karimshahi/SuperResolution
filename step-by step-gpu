@@ -2,6 +2,29 @@ download and install, python 3.10,
 anaconda latest version
 https://docs.anaconda.com/anaconda/install/
 ( https://www.anaconda.com/download?utm_source=anacondadocs&utm_medium=documentation&utm_campaign=download&utm_content=topnavalldocs) 
+
+---------------------
+download and install cuda 11.8
+download and install cuddNN 
+Installing cuDNN compatible with CUDA 11.8
+
+To install cuDNN that is compatible with CUDA 11.8, follow these steps:
+
+Check System Requirements : Ensure that your system meets the requirements for CUDA 11.8 and the corresponding version of cuDNN.
+Download cuDNN :
+Go to the NVIDIA cuDNN website .
+Sign in with your NVIDIA account or create one if you don’t have it.
+Navigate to the download section and select the version of cuDNN that is compatible with CUDA 11.8.
+Download the appropriate package for your operating system (Windows, Linux, or macOS).
+Install cuDNN :
+Extract the downloaded cuDNN package.
+Copy the files to the CUDA installation directory. Typically, this will involve copying:
+cudnn*.h file to the include folder (e.g., /usr/local/cuda/include/ on Linux).
+libcudnn* library files to the lib64 folder (e.g., /usr/local/cuda/lib64/ on Linux).
+Make sure to update your environment variables if necessary (e.g., LD_LIBRARY_PATH on Linux).
+Verify Installation :
+Run a sample program or test script to ensure that cuDNN is correctly installed and working with CUDA 11.8.
+
 ---------------------
 install vs2022 
 install pycharm 2024
