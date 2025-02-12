@@ -13,3 +13,15 @@ pip install tensorflow
 pip install pytorch ( https://pytorch.org/) ( If you have installed any operating system and any type of CUDA on your system, select it from the desired list, and the corresponding link below will change accordingly.) 
 for example this link is for ( stable, windows, pip, python, cuda 11.8 ) pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ---------------------
+install acikit
+pip install scikit-image
+---------------------
+
+on windows (open control panel )
+write on search bar ( environment ) open edite the system environment variable
+tabe advance--> startup and recovery --> click environment variables
+system variables --> open path --> edite patch 
+
+
+
+
