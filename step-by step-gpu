@@ -27,8 +27,8 @@ Run a sample program or test script to ensure that cuDNN is correctly installed 
 if you is on iran( befor installation you shud run vpn)
 
 ---------------------
-install vs2022 
-install pycharm 2024
+install vs2022 - 2024
+install pycharm 2024 -2023
 ---------------------
 conda create --name tfgpu
 conda activate tfgpu
@@ -45,6 +45,7 @@ on windows (open control panel )
 write on search bar ( environment ) open edite the system environment variable
 tabe advance--> startup and recovery --> click environment variables
 system variables --> open path --> edite patch 
+---------------------
 
 
 
