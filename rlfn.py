@@ -51,3 +51,79 @@ rlfn.train(x_train, y_train)
 x_test = np.random.rand(20, input_dim)
 y_pred = rlfm.predict(x_test)
 print(y_pred)
+
+-------------------------
+
+import torch
+from torch import nn, optim
+from torchvision import transforms, utils
+from torch.utils import data
+import os
+from PIL import Image
+
+class RLFN(nn.Module):
+    def __init__(self, in_channels=3, out_channels=3, scale_factor=2, num_features=32, num_blocks=8):
+        super(RLFN, self).__init__()
+        self.scale_factor = scale_factor
+
+        # Initial convolution
+        self.conv1 = nn.Conv2d(in_channels, num_features, 3, padding=1)
+
+        # Residual blocks
+        self.res_blocks = nn.Sequential(*[
+            nn.Sequential(
+                nn.Conv2d(num_features, num_features, 3, padding=1),
+                nn.ReLU(),
+                nn.Conv2d(num_features, num_features, 3, padding=1)
+            ) for _ in range(num_blocks)
+        ])
+
+        # Final processing
+        self.conv2 = nn.Conv2d(num_features, num_features, 3, padding=1)
+
+        # Upscaling
+        self.upscale = nn.Sequential(
+            nn.Conv2d(num_features, num_features * (scale_factor ** 2), 3, padding=1),
+            nn.PixelShuffle(scale_factor),
+            nn.Conv2d(num_features, out_channels, 3, padding=1)
+        )
+
+    def forward(self, x):
+        x = self.conv1(x)
+        shortcut = x
+
+        x = self.res_blocks(x)
+        x = self.conv2(x) + shortcut
+
+        return self.upscale(x) 
+
+# Define transforms
+transform = transforms.Compose([
+    transforms.ToTensor()])
+
+# Load and pre-process training dataset
+train_data = utils.ImageFolder(root=os.getcwd(), transform=transform)
+print("Training images:", len(train_data))
+loader = data.DataLoader(dataset=train_data, batch_size=16, shuffle=True)
+
+# Define network and optimizer
+model = RLFN()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+
+epochs = 20 # number of epochs to train for
+for i in range(0, epochs):
+    loss_sum = 0
+    
+    for x, y in loader:
+        optimizer.zero_grad()
+        
+        out = model(x)
+        loss = nn.MSELoss()(out, y)
+        loss.backward()
+        
+        optimizer.step()
+        
+        loss_sum += loss.item()
+    
+    print("Loss for epoch %d: %.4f" % (i + 1, loss_sum / len(train_data)))
+
