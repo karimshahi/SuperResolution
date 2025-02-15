@@ -127,3 +127,46 @@ for i in range(0, epochs):
     
     print("Loss for epoch %d: %.4f" % (i + 1, loss_sum / len(train_data)))
 
+----------------------------------------------
+
+class RLFN(nn.Module):
+    def __init__(self, in_channels=3, out_channels=3, scale_factor=2, num_features=64, num_blocks=8):
+        super(RLFN, self).__init__()
+        self.scale = scale_factor
+
+        # Initial features extraction
+        self.conv_in = nn.Conv2d(in_channels, num_features, 3, padding=1)
+
+        # Residual blocks
+        self.res_blocks = nn.Sequential(*[ResidualBlock(num_features) for _ in range(num_blocks)])
+
+        # Feature transformation
+        self.conv_out = nn.Conv2d(num_features, num_features, 3, padding=1)
+
+        # Upscaling module
+        self.upscale = nn.Sequential(
+            nn.Conv2d(num_features, num_features * (scale_factor ** 2), 3, padding=1),
+            nn.PixelShuffle(scale_factor),
+            nn.Conv2d(num_features, out_channels, kernel_size=3, padding=1)
+        )
+
+    def forward(self, x):
+        x = self.conv_in(x)  # Initial features
+        x = self.res_blocks(x)  # Through residual blocks
+        x = self.conv_out(x)  # Final processing
+
+        return self.upscale(x)  # Upscaling and output
+
+
+class ResidualBlock(nn.Module):
+    def __init__(self, num_features):
+        super(ResidualBlock, self).__init__()
+        self.body = nn.Sequential(
+            nn.Conv2d(num_features, num_features, 3, 1, 1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(num_features, num_features, 3, 1, 1),
+        )
+
+    def forward(self, x):
+        return x + self.body(x)
+
