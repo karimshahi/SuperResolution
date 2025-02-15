@@ -1,46 +1,14 @@
-# وارد کردن کتابخانه‌های مورد نیاز
-import tensorflow as tf
-import numpy as np
-import time
+train_lr_tensors = load_images(r'NewDataSet\Train\LR256')
+train_hr_tensors = load_images(r'NewDataSet\Train\HR256')
+valid_lr_tensors = load_images(r'div2k\DIV2K_valid_LR_bicubic_X2\DIV2K_valid_LR_bicubic\X2')
+valid_hr_tensors = load_images(r'div2k\DIV2K_valid_HR\DIV2K_valid_HR')
+test_lr_tensors = load_images(r'div2k\DIV2K_test_LR_bicubic_X2\DIV2K_test_LR_bicubic\X2\Set5')
+test_hr_tensors = load_images(r'div2k\DIV2K_test_HR\DIV2K_test_HR\Set5')
 
-# تعریف یک تابع برای محاسبه دترمینان یک ماتریس با استفاده از یک دستگاه خاص
-def compute_determinant(matrix, device):
-  # انتخاب دستگاه
-  with tf.device(device):
-    # تبدیل ماتریس به یک تانسور
-    tensor = tf.convert_to_tensor(matrix)
-    # محاسبه دترمینان با استفاده از تابع det
-    determinant = tf.linalg.det(tensor)
-    # چاپ نتیجه
-    print(f"The determinant of the matrix on {device} is {determinant}")
+train_dataset = DIV2KDataset(train_lr_tensors[:33240], train_hr_tensors[:33240])
+valid_dataset = DIV2KDataset(valid_lr_tensors[:100], valid_hr_tensors[:100])
+test_dataset = DIV2KDataset(test_lr_tensors[:10], test_hr_tensors[:10])
 
-# ایجاد یک ماتریس 100 در 100 با اعداد تصادفی
-matrix = np.random.rand(100, 100)
-
-# محاسبه دترمینان ماتریس با استفاده از GPU های موجود
-# شماره GPU ها را بر اساس سیستم خود تنظیم کنید
-# اینجا فرض شده است که دو GPU با شماره 0 و 1 وجود دارند
-gpus = ['/GPU:0', '/GPU:1']
-for gpu in gpus:
-  # ثبت زمان شروع
-  start = time.time()
-  # فراخوانی تابع محاسبه دترمینان
-  compute_determinant(matrix, gpu)
-  # ثبت زمان پایان
-  end = time.time()
-  # محاسبه مدت زمان اجرا
-  duration = end - start
-  # چاپ مدت زمان اجرا
-  print(f"The execution time on {gpu} was {duration} seconds")
-
-# محاسبه دترمینان ماتریس با استفاده از CPU
-# ثبت زمان شروع
-start = time.time()
-# فراخوانی تابع محاسبه دترمینان
-compute_determinant(matrix, '/CPU:0')
-# ثبت زمان پایان
-end = time.time()
-# محاسبه مدت زمان اجرا
-duration = end - start
-# چاپ مدت زمان اجرا
-print(f"The execution time on /CPU:0 was {duration} seconds")
+train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+valid_loader = torch.utils.data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
+test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
