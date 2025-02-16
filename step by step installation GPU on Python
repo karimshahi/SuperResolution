@@ -38,3 +38,13 @@ pip install tensorflow
 pip install tensorflow-gpu
 
 enjoy cuda and GPU computing
+
+-------------------------
+setup cuda recommended cuda 11.8
+setup cudNN 
+install anaconda
+create environment like tfgpu
+( open anaconda terminal and write conda create --name tfgpu
+conda activated tfgpu)
+install tensorflow
+install pytorch
